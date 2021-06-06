@@ -37,7 +37,29 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("2- Identificar clústeres de comunicación")
+    print("3- Identificar puntos de conexión críticos de la red")
+    print("4- Identificar ruta de menor distancia")
+    print("5- Identificar infraestructura crítica de la red")
+    print("6- Análisis de fallas")
+    print("7- Identificar los mejores canañes para transmitir")
+    print("8- Identificar la mejor ruta para comunicarse")
+    print("0- Salir")
+
+def printInfoCountries(info_countries):
+    print("El total de países cargados es de " + str(info_countries['count']))
+    print("El último país cargado es " + str(info_countries['last']['CountryName']) + 
+          " con población de " + str(info_countries['last']['Population']) + " y " + 
+          str(info_countries['last']['Internet users']) + " usuarios de internet")
+
+def printInfoLpoints(info_lpoints):
+    print("El total de landing points cargados es de " + str(info_lpoints['count']))
+    print("El primer landing point cargado tiene id: " + str(info_lpoints['first']['landing_point_id']) + 
+          ", nombre: " + str(info_lpoints['first']['name']) + ", latitud: " + 
+          str(info_lpoints['first']['latitude']) + ", longitud: " + str(info_lpoints['first']['longitude']))
+
+def printInfoConnections(info_connections):
+    print("La cantidad de conexiones cargadas es de " + str(info_connections))
 
 catalog = None
 
@@ -49,9 +71,34 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-
+        process = controller.createCatalog()
+        catalog = process[0]
+        info = process[1]
+        printInfoCountries(info[0])
+        printInfoLpoints(info[1])
+        printInfoConnections(info[2])
+        
     elif int(inputs[0]) == 2:
+        print(" ======================= REQUERIMIENTO 1 ======================= ")
         pass
+
+    elif int(inputs[0]) == 3:
+        print(" ======================= REQUERIMIENTO 2 ======================= ")
+        pass
+
+    elif int(inputs[0]) == 4:
+        print(" ======================= REQUERIMIENTO 3 ======================= ")
+        pass
+
+    elif int(inputs[0]) == 5:
+        print(" ======================= REQUERIMIENTO 4 ======================= ")
+        pass
+
+    elif int(inputs[0]) == 5:
+        print(" ======================= REQUERIMIENTO 5 ======================= ")
+        pass
+
+
 
     else:
         sys.exit(0)
