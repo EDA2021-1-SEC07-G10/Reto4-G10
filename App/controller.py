@@ -20,6 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+from DISClib.ADT.indexminpq import contains
 import config as cf
 import model
 import csv
@@ -85,4 +86,40 @@ def loadInfo(structure):
 
 # Funciones de consulta sobre el catálogo
 
+def lpointID(catalog, lpointname):
+    for point in lt.iterator(catalog['lpoints_list']):
+        if lpointname in point:
+            lp = point
+            break
+    lpID = (lp.split(";"))[0]
+    return lpID
 
+
+def req2(catalog):
+    result = model.req2(catalog)
+    return result
+
+def req3(catalog, countryA, countryB):
+    pointA = None
+    pointB = None
+    contA = True
+    contB = True
+    count = 0
+    for lp in lt.iterator(catalog['lpoints_list']):
+        if countryA in lp and contA == True:
+            pointA = (lp.split(";"))[0]
+            contA = False
+        elif countryB in lp and contB == True:
+            pointB = (lp.split(";"))[0]
+            contB = False
+        if (contA == False and contB == False) or (count == int(lt.size(catalog['lpoints_list'])) - 1):
+            break
+        count += 1
+    result = model.req3(catalog, pointA, pointB)
+    return result
+
+def req5(catalog, lpointname):
+
+    lpoint = lpointID(catalog, lpointname)
+    result = model.req5(catalog, lpoint)
+    return result

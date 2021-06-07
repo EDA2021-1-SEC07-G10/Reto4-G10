@@ -84,22 +84,34 @@ while True:
 
     elif int(inputs[0]) == 3:
         print(" ======================= REQUERIMIENTO 2 ======================= ")
-        pass
-
+        points_list = controller.req2(catalog)
+        for lpoint in lt.iterator(points_list):
+            print(" > " + "Nombre: " + lpoint['name'] + " || País:" + lpoint['country'] + " || ID: " + lpoint['id'] + " || Cables: " +  str(lpoint['amount']))
+            
     elif int(inputs[0]) == 4:
         print(" ======================= REQUERIMIENTO 3 ======================= ")
-        pass
-
+        countryA = input("Ingrese el país A: ")
+        countryB = input("Ingrese el país B: ")
+        result = controller.req3(catalog, countryA, countryB)
+        if result[0] == None:
+            print("No hay comunicación entre ambos países")
+        else:
+            print("La ruta obtenida (por tramos) ha sido:")
+            for element in lt.iterator(result[0]):
+                print(" > " + element['vertexA'] + " a " + element['vertexB'] + " con una distancia de " + str(element['weight']) + "km")
+            print("La distancia total entre ambos países es de " + str(round(result[1], 2)) + "km" )
     elif int(inputs[0]) == 5:
         print(" ======================= REQUERIMIENTO 4 ======================= ")
         pass
 
-    elif int(inputs[0]) == 5:
+    elif int(inputs[0]) == 6:
         print(" ======================= REQUERIMIENTO 5 ======================= ")
-        pass
-
-
-
+        lpointname = input("Ingrese el nombre del landing point: ")
+        result = controller.req5(catalog, lpointname)
+        print("La cantidad de países afectados sería: " + str(lt.size(result)))
+        for point in lt.iterator(result):
+            print(" > " + point[0] + " a " + point[1] + " de distancia")
+        
     else:
         sys.exit(0)
 sys.exit(0)
