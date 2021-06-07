@@ -121,7 +121,6 @@ def req2(catalog):
 def req3(catalog, pointA, pointB):
     execution = djk.Dijkstra(catalog['connections'], pointA)
     distance = djk.distTo(execution, pointB)
-    print(djk.hasPathTo(execution, pointB))
     path = djk.pathTo(execution, pointB)
     return (path, distance)
     
